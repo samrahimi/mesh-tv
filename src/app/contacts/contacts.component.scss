@@ -1,0 +1,45 @@
+@import '~igniteui-angular/lib/core/styles/themes/utilities';
+
+:host {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    
+    article > p {
+        max-width: 80ch;
+    }
+
+    @include b(content) {
+   
+        @include e(links) {
+            display: flex;
+            flex-flow: row wrap;
+            margin-bottom: 48px;
+            margin-top: 24px;
+        }
+        
+        @include e(link, $m: github) {
+            position: relative;
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+    
+            
+            + #{nth(&, 1)} {
+                margin-left: 72px;
+            }
+
+            &::before {
+                position: relative;
+                display: block;
+                content: '';
+                min-width: 24px;
+                min-height: 24px;
+                background-image: url('../../assets/GitHub/github.svg');
+                background-size: 24px 24px;
+                background-repeat: no-repeat;
+                margin-right: 8px;
+            }
+        }
+    }
+}

@@ -1,0 +1,54 @@
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class ArweaveServiceService {
+public 
+  constructor() { }
+/*
+Previously shared: The Group Identifier
+
+Peer peer1, peer2 are completely unaware of each other's 
+online presence, or how to contact each other 
+
+peer1 and peer2 visit  https://arweave_page_url#unique_group_id
+* whoever gets there first becomes peer1
+
+groupId=getGroupIdFromUrl()
+
+p1.isinitiator
+
+p1.on('signal', (signalData,groupId,MY_WALLET_ID) => {
+  //the signal data gets seeded to bittorrent, and is seeded there until //picked up by the next peer to arrive in the room. 
+  var torrentInfoHash = webtorrent.seed(signalData, expireAfter(1 hour))
+
+
+  //because there is no way for peer 2 to know the "filename" of the 
+  //signal data due to the distributed-hash-table nature of torrents, 
+  //we associate the group_id: torrent_hash and upload to arweave  
+
+  arweave.post({
+    namespace: 'im.svnc.artv', 
+    dest_group_id: groupId,
+    time_sent: time,
+
+  }, MY_WALLET_ID)
+
+  saveTorrentHashToBrowserStorage() 
+
+})
+
+
+p2.every(10 seconds)
+.getLatestSignalData(group_id, count = 1).then(signalDataFromPeer1() => {
+  //start the STUNNING and negotiate a connection to peer 1. 
+  //
+  //say hi, peer 1 will send you an update with everyone else's signaling data
+  //you are now a full grown Peer and are responsible for onboarding peer 3 
+  //just like peer 2 introduced you to all his buddies :)
+
+
+})
+
+('on', getMessagesWithArql)*/
+
+}

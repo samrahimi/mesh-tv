@@ -1,0 +1,21 @@
+h1 {
+    margin: 32px auto;
+}
+
+.feature-image {
+    width: 100%;
+    max-width: 460px;
+}
+
+.discover-button {
+    margin-top: 24px;
+
+    a {
+        text-decoration: none;
+    }
+
+    button {
+        background-color: #f44235;
+        color: white;
+    }
+}

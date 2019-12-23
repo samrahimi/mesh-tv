@@ -1,0 +1,15 @@
+.content {
+    display: flex;
+    text-align: center;
+    flex-flow: column nowrap;
+    justify-content: stretch;
+    align-items: center;
+    width: 100%;
+    height: calc(100% - 56px);
+    padding: 40px 24px 24px;
+    overflow: auto;
+}
+
+igx-bottom-nav {
+    width: 100%;
+}

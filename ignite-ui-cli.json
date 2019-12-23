@@ -1,0 +1,33 @@
+{
+    "igPackageRegistry": "https://packages.infragistics.com/npm/js-licensed/",
+    "skipGit": false,
+    "skipAnalytic": false,
+    "stepByStep": {
+        "frameworks": [
+            "angular"
+        ],
+        "angular": {
+            "projTypes": [
+                "igx-ts"
+            ]
+        }
+    },
+    "version": "3.2.2",
+    "project": {
+        "defaultPort": "4201",
+        "framework": "angular",
+        "projectType": "igx-ts",
+        "projectTemplate": "empty-project",
+        "theme": "Custom",
+        "themePath": "$(themePath)",
+        "isBundle": false,
+        "bundleFilePath": "",
+        "igniteuiSource": "",
+        "components": [],
+        "sourceFiles": [],
+        "isShowcase": false,
+        "version": ""
+    },
+    "build": {},
+    "packagesInstalled": true
+}

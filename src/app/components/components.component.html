@@ -1,0 +1,19 @@
+<div class="component-row">
+  <div class="component-column" *ngFor="let group of components">
+    <igx-list class="component-list">
+      <igx-list-item #item *ngFor="let component of group.group" isHeader="{{component.header}}">
+        <div *ngIf="component.header">{{ component.name }}</div>
+        <a *ngIf="!component.header" href="{{ rootUrl }}{{ component.href }}" target="_blank" class="content-link">
+          <div  class="item-container content__link-image" >
+            <igx-icon>{{component.icon}}</igx-icon>  
+            <span class="component">
+                {{ component.name }}
+            </span>
+            <igx-icon class="link-icon">link</igx-icon>
+          </div>
+        </a>
+      </igx-list-item>
+    </igx-list>
+  </div>
+</div>
+ 
