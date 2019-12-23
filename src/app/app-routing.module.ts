@@ -9,7 +9,8 @@ import { CreateRoomComponent } from './create-room/create-room.component';
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
   { path: 'home', component: HomeComponent, data: { text: 'Home', icon: 'home' } },
-  { path: 'create-room', component: CreateRoomComponent, data: { text: 'TV Room', icon: 'tv' } },
+  { path: 'rooms', component: CreateRoomComponent, data: { text: 'TV Rooms', icon: 'tv' } },
+  { path: 'torrents', component: CreateRoomComponent, data: { text: 'Torrents', icon: 'theaters' } },
 
   //{ path: 'components', component: ComponentsComponent, data: { text: 'Components', icon: 'web' } },
   //{ path: 'contacts', component: ContactsComponent, data: { text: 'Contacts', icon: 'subject' } },
@@ -17,7 +18,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), ErrorRoutingModule],
+  imports: [RouterModule.forRoot(routes, {useHash: true}), ErrorRoutingModule],
   exports: [RouterModule, ErrorRoutingModule]
 })
 export class AppRoutingModule {
