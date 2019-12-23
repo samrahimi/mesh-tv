@@ -9,8 +9,10 @@ import { ContactsComponent } from './contacts/contacts.component';
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
   { path: 'home', component: HomeComponent, data: { text: 'Home', icon: 'home' } },
-  { path: 'components', component: ComponentsComponent, data: { text: 'Components', icon: 'web' } },
-  { path: 'contacts', component: ContactsComponent, data: { text: 'Contacts', icon: 'subject' } },
+  { path: 'create-room', component: HomeComponent, data: { text: 'TV Room', icon: 'tv' } },
+
+  //{ path: 'components', component: ComponentsComponent, data: { text: 'Components', icon: 'web' } },
+  //{ path: 'contacts', component: ContactsComponent, data: { text: 'Contacts', icon: 'subject' } },
   { path: '**', component: PageNotFoundComponent }
 ];
 
