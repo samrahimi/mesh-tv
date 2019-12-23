@@ -8,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class CreateRoomComponent implements OnInit {
 
   constructor() { }
-  roomId: any = null || getWalletIdFromStorage()
-  myWalletId: any = null || getWalletIdFromStorage()
+  
+  roomId: any = null || localStorage.getItem("roomId")
+  myWalletId: any = null || localStorage.getItem("walletId")
+
   ngOnInit() {
   }
 
