@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "empty_new": {
+    "mesh_tv": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/empty_new",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -30,7 +30,11 @@
               "node_modules/minireset.css/minireset.css",
               "src/styles.scss"
             ],
-            "scripts": ["./node_modules/hammerjs/hammer.min.js"]
+            "scripts": [
+                    "./node_modules/hammerjs/hammer.min.js",
+                    "./node_modules/webtorrent/webtorrent.min.js",
+                    "./node_modules/arweave/bundles/web.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -65,21 +69,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "empty_new:build"
+            "browserTarget": "mesh_tv:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "empty_new:build:production"
+              "browserTarget": "mesh_tv:build:production"
             },
             "es5": {
-              "browserTarget": "empty_new:build:es5"
+              "browserTarget": "mesh_tv:build:es5"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "empty_new:build"
+            "browserTarget": "mesh_tv:build"
           }
         },
         "test": {
@@ -93,7 +97,11 @@
               "node_modules/minireset.css/minireset.css",
               "src/styles.scss"
             ],
-            "scripts": ["./node_modules/hammerjs/hammer.min.js"],
+            "scripts": [
+              "./node_modules/hammerjs/hammer.min.js",
+              "./node_modules/webtorrent/webtorrent.min.js",
+              "./node_modules/arweave/bundles/web.bundle.min.js"
+              ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -114,7 +122,7 @@
         }
       }
     },
-    "empty_new-e2e": {
+    "mesh_tv-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -123,11 +131,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "empty_new:serve"
+            "devServerTarget": "mesh_tv:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "empty_new:serve:production"
+              "devServerTarget": "mesh_tv:serve:production"
             }
           }
         },
@@ -143,5 +151,5 @@
       }
     }
   },
-  "defaultProject": "empty_new"
+  "defaultProject": "mesh_tv"
 }

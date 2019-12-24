@@ -18,3 +18,25 @@ html, body {
     $prop: 'color',
     $suffix: 'text'
 );
+
+.discover-button {
+  margin: 24px;
+  
+  a {
+      text-decoration: none;
+  }
+
+  button {
+      background-color: #f44235;
+      color: white;
+      width: 100px;
+
+      &.secondary {
+        background-color: #555;
+        color: white;
+      }
+  }
+
+
+}
+

@@ -1,4 +1,110 @@
+
+<!--
 <p>Connectivity test: If you are able to watch the video then ARTV will work for you<p>
 <div class="responsive-16-9">
 <video id="test-stream" autoplay muted></video>
+</div>
+
+igx-typography__h1
+igx-typography__h2
+igx-typography__h3
+igx-typography__h4
+igx-typography__h5
+igx-typography__h6
+igx-typography__subtitle-1
+igx-typography__subtitle-2
+igx-typography__body-1
+igx-typography__body-2
+igx-typography__button
+igx-typography__caption
+igx-typography__overline
+
+-->
+<div *ngIf="!user.loggedIn">
+
+    <h1 class="igx-typography__h3">Login With Arweave</h1>
+    <div class="login-form" style="width:100vw; max-width:500px; text-align:left; padding-left:10px; margin-top:10px; margin-bottom:20px"> 
+        
+        <div class="form-group">
+            <label for="wallet-file">Arweave Wallet File:&nbsp;</label>
+            <input id="wallet-file" type="file" (change)="handleFileInput($event.target.files)"  /><br />
+            <span *ngIf="" class="igx-typography__caption"></span>
+        </div>
+
+        <code *ngIf="user.wallet.address.length > 0" id="wallet-file" class="igx-typography__caption" style="width:calc(100% - 10px); padding:5px; border-radius: 4px; background-color:#ccc;display:block">
+            wallet {{user.wallet.address.substring(0, 15)}}... loaded, balance is {{user.wallet.balance}}
+        </code>
+
+        <div class="form-group" style="margin-top:10px">
+            <input id="room-name" class="igx-typography__body-2" style="width:calc(100% - 10px); padding:5px; border-radius: 4px; border: solid 1px black" type="text" placeholder="Room to Join or Create" [(ngModel)]="room.name" />
+        </div>
+
+        <div class="form-group" style="margin-top:10px">
+            <input id="user-name" class="igx-typography__body-2" style="width:calc(100% - 10px); padding:5px; border-radius: 4px; border: solid 1px black" type="text" placeholder="Your Name" [(ngModel)]="user.displayName" />
+        </div>
+
+
+    </div>
+
+    <div class="discover-button">
+        <a (click)="doLogin()">
+        <button igxButton="raised" igxRipple="white">Log In</button>
+        </a>
+
+        &nbsp;&nbsp;
+
+        <a href="/#/home">
+            <button igxButton="raised" class="secondary" igxRipple="white">Cancel</button>
+        </a>
+    </div>
+
+
+
+</div>
+
+<div *ngIf="user.loggedIn">
+    <h1 class="igx-typography__h3">{{room.name}}</h1>
+    <div class="igx-typography__caption"><b>Users Online: </b>{{getNames(room.peers)}}</div>
+    <div class="igx-typography__caption"><b>Room Owner: </b>{{room.owner.displayName}}</div>
+    <div class="igx-typography__caption"><b>Movie: </b>{{room.movie == null ? 'None Selected' : room.movie.name}}</div>
+
+    <div class="igx-typography__caption" *ngIf="room.movie != null">{{getTorrentInfo(room.movie)}}</div>
+
+    <div class="row torrent-container" style="max-height:calc(1vh - 200px)">
+        <div class="col col-md-8">
+            <b>Video Player</b>
+            <div class="responsive-16-9">
+                <video id="ARRRRRRRRR" autoplay muted controls></video>
+            </div>
+        </div>
+
+        <div class="col col-md-4">
+            <b>Chat</b>
+            <div class="chat-column">
+                <ul>
+                    <li><b>Name: </b> Message</li>
+                    <li><b>Name: </b> Message</li>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row user-status">
+        <div class="col col-4">
+            <b>Wallet Address</b> <br />
+                {{user.wallet.address}}
+        </div>
+        <div class="col col-4">
+            <b>Current Balance</b> <br />
+                {{user.wallet.balance}}
+        </div>
+        <div class="col col-4">
+            <b>Display Name</b> <br />
+                {{user.displayName}}
+        </div>
+
+    </div>
+        
 </div>

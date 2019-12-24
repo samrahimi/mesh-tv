@@ -1,20 +1,25 @@
   
   :root {
-  .responsive-16-9 {
-      position: relative;
-      padding: 0 0 56.25% 0;
-      height: 0;
-      width: 100%;
+    .responsive-16-9 {
+        position: relative;
+        padding: 0 0 56.25% 0;
+        height: 0;
+        width: 100%;
 
-      video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            z-index:1;
-        }
-  }
+        video {
+              position: absolute;
+              top: 0;
+              left: 0;
+              margin: 0;
+              padding: 0;
+              width: 100%;
+              height: 100%;
+              z-index:1;
+          }
+    }
+
+    .login-form {
+      width:100vw; max-width:600px; text-align:left;
+    }
+
   }

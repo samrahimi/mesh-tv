@@ -1,9 +1,58 @@
 import { Injectable } from '@angular/core';
+import  { Observable, BehaviorSubject } from 'rxjs';
 
-@Injectable()
+
+@Injectable({providedIn: 'root'})
 export class ArweaveServiceService {
-public 
-  constructor() { }
+
+  //the npm module didn't play nice with Angular, so we loaded the bundle version in angular.json scripts[]
+  public arweaveSdk = window["Arweave"].init()
+  
+  //please use currentWallet$.subscribe as users will often want to switch wallets mid session
+  //but you can get the atomic value if you need to
+  public _currentWallet = {address: '', balance: 0, keystore: null, rawJson: ''}
+  public currentWallet$; 
+
+
+  constructor() {
+    console.log("ArweaveServiceService constructor")
+    this.getNetworkStatus(info => console.log(info))
+    this.currentWallet$ = new BehaviorSubject(this._currentWallet)
+  }
+
+  //Main wallet decryption function
+  loginWithWalletString(walletJson: any) {
+    try {
+       var wallet = JSON.parse(walletJson)
+       this.arweaveSdk.wallets.jwkToAddress(wallet).then((address) => {
+           this.arweaveSdk.wallets.getBalance(address).then((balance)=> {
+            this._currentWallet = {address: address, balance: balance, keystore: wallet, rawJson: JSON.stringify(wallet, null, 2)}
+            this.currentWallet$.next(this._currentWallet)
+      
+            if (balance < 100000) {
+              console.log("Balance extremely low, app may not work. Visit tokens.arweave.org and get a new wallet + 1.00000 AR in free tokens")
+            }      
+          })
+       })
+    } catch (err) {
+      console.log(JSON.stringify(err, null, 2))
+      alert("Not an Arweave wallet file! Visit tokens.arweave.org and get a new wallet + 1.00000 AR in free tokens")
+    }
+  }
+
+  //If the user has uploaded their wallet using an HTML file input
+  loginWithWalletFile(jsonFile: File) {
+    const reader = new FileReader()
+    reader.readAsText(jsonFile)
+    reader.onloadend = () => {
+        this.loginWithWalletString(reader.result)
+    }
+  }
+
+  getNetworkStatus(callback) {
+    this.arweaveSdk.network.getInfo().then(info => callback(info))
+  }
+
 /*
 Previously shared: The Group Identifier
 

@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { CreateRoomComponent } from './create-room/create-room.component';
-import { ArweaveServiceService } from './Services/arweave-service.service';
+import { ArweaveServiceService } from './services/arweave-service.service';
 
 @NgModule({
   declarations: [
