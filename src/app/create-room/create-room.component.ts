@@ -8,7 +8,7 @@ import { ArweaveServiceService } from '../services/arweave-service.service'
 })
 export class CreateRoomComponent implements OnInit {
 
-  room = {name: '', peers: [], movie: null}
+  room = {channel: {name: ''}, peers: [], movie: null}
 
   user = {
     loggedIn: false,
@@ -43,7 +43,9 @@ export class CreateRoomComponent implements OnInit {
     
   }
   
-
+  doLogin() {
+    this.ass.getOrCreateChannel(this.room.channel.name, this.user.displayName)
+  }
   handleFileInput(files: FileList) {
     this.ass.loginWithWalletFile(files.item(0))
   }
@@ -51,6 +53,10 @@ export class CreateRoomComponent implements OnInit {
     this.ass.currentWallet$.subscribe((newWallet) => {
       this.user.wallet = newWallet;
     })
+    /*
+    this.ass.currentChannel$.subscribe((currentChannel) => {
+      this.room.channel = currentChannel
+    }) */
   }
 
 }

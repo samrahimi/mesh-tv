@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  AR_APP_ID: 'im.svn.mesh-tv'
+
 };

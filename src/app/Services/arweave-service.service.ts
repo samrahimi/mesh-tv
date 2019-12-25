@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import  { Observable, BehaviorSubject } from 'rxjs';
+import {environment} from '../../environments/environment';
+
+//this library is awesome, highly recommend it! https://www.npmjs.com/package/arql-ops
+import {and, or, equals} from 'arql-ops'; 
 
 
 @Injectable({providedIn: 'root'})
@@ -8,16 +12,71 @@ export class ArweaveServiceService {
   //the npm module didn't play nice with Angular, so we loaded the bundle version in angular.json scripts[]
   public arweaveSdk = window["Arweave"].init()
   
-  //please use currentWallet$.subscribe as users will often want to switch wallets mid session
-  //but you can get the atomic value if you need to
   public _currentWallet = {address: '', balance: 0, keystore: null, rawJson: ''}
   public currentWallet$; 
 
+  public _allChannels = []
+  public allChannels$
+
+  public _currentChannel = {}
+  public currentChannel$
 
   constructor() {
     console.log("ArweaveServiceService constructor")
     this.getNetworkStatus(info => console.log(info))
     this.currentWallet$ = new BehaviorSubject(this._currentWallet)
+    this.allChannels$ = new BehaviorSubject(this._allChannels)
+    this.currentChannel$ = new BehaviorSubject(this._currentChannel)
+  }
+
+  async getAllChannels() {
+    this._allChannels= []
+
+    const query = and(  
+      equals('AR_APP_ID', environment.AR_APP_ID),
+      equals('type', 'channel')
+    )
+
+    const txids = await this.arweaveSdk.arql(query)
+    console.log("get all channels - step 1")
+    console.log(JSON.stringify(txids))
+
+    txids.forEach(async(txid) => {
+      var tx = await this.arweaveSdk.transactions.get(txid)
+      this._allChannels.push(JSON.parse(tx.get('data', {decode: true, string: true})))
+    })
+
+    console.log("get all channels - step 2")
+    console.log(JSON.stringify(this._allChannels))
+
+    this.allChannels$.next(this._allChannels)
+    return this._allChannels;
+  }
+
+  async getOrCreateChannel(channelName, creatorName) {
+    var allChannels = await this.getAllChannels()
+    if (allChannels.filter(channel => channel.name == channelName).length > 0) {
+      console.log("returning existing channel "+channelName)
+      this._currentChannel = allChannels.filter(channel => channel.name == name)[0]
+      this.currentChannel$.next(this._currentChannel) 
+    } else {
+      
+      var newChannel = {name: channelName, creator: creatorName, createdAt: (new Date()).getTime()}
+      this._currentChannel = newChannel
+      this.currentChannel$.next(this._currentChannel)
+
+      console.log("created new channel "+channelName+", submitting in background")
+      var tx = await this.arweaveSdk.createTransaction({data: JSON.stringify(newChannel)}, this._currentWallet.keystore)
+
+      tx.addTag('Content-Type', 'text/plain')
+      tx.addTag('AR_APP_ID', environment.AR_APP_ID)
+      tx.addTag('type', 'channel')
+
+      await this.arweaveSdk.transactions.sign(tx, this._currentWallet.keystore)
+      console.log(JSON.stringify(tx))
+      var response = await this.arweaveSdk.transactions.post(tx)
+      console.log(JSON.stringify(response))
+    }
   }
 
   //Main wallet decryption function
